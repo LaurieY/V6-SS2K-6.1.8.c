@@ -1368,6 +1368,16 @@ g_Tracing.Trace ("End Wait in ScopeMoveAxis")
     Select Case Axis
         Case axisPrimary:
         m_preMoveRA = True
+        
+        If (Rate = 0) And (m_movingRA = False) Then     ' SGPro does send Primatry Axis Rate 0 as a stop moving - ignore it if there are no RA moves in progress
+            If (Rate = 0) And (m_movingDEC = True) Then
+            '  stop the DEC Move?
+             AbortSlew
+           m_movingDEC = False
+            End If
+          Exit Sub
+        End If
+        
          If (d_rateError > g_derrorMargin) And (d_rateDiff > ONE_PCT) Then
          g_Tracing.Trace ("Error in ScopeMoveAxis rate not acceptable ")
          Err.Raise SCODE_MOVE_RATE_ERROR, _
