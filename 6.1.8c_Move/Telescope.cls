@@ -1371,18 +1371,25 @@ g_Tracing.Trace ("End Wait in ScopeMoveAxis")
         Case axisPrimary:
         m_preMoveRA = True
         
-        If (Rate = 0) And (m_movingRA = False) Then
+        If (Rate = 0) Then
         g_Tracing.Trace ("Received Primary with Rate zero and  Moving RA  and Moving DEC are " + CStr(m_movingRA) + "||" + CStr(m_movingDEC))
+         If (m_movingRA = False) Then
+        
         ' SGPro does send Primatry Axis Rate 0 as a stop moving - ignore it if there are no RA moves in progress
-            If (Rate = 0) And (m_movingDEC = True) Then
-            '  stop the DEC Move?
-        g_Tracing.Trace ("Aborting  Dec on primary rate zero")
-             AbortSlew
-           m_movingDEC = False
-            End If
-            g_Tracing.Trace ("Exiting Sub cos Moving RA  and Moving DEC are " + CStr(m_movingRA) + "||" + CStr(m_movingDEC))
+             '   If (Rate = 0) And (m_movingDEC = True) Then
+               '' '  stop the DEC Move?
+           ' g_Tracing.Trace ("Aborting  Dec on primary rate zero")
+             '    AbortSlew
+             '  m_movingDEC = False
+            '    End If
+           g_Tracing.Trace ("Exiting Sub cos Moving RA  and Moving DEC are " + CStr(m_movingRA) + "||" + CStr(m_movingDEC))
           Exit Sub
-        End If
+          Else
+          'Rate 0 and RA is moving so do abort
+          g_Tracing.Trace ("Aborting RA Move cos Rate is zero")
+          AbortSlew
+          
+          End If  ' of Rate zero
         
          If (d_rateError > g_derrorMargin) And (d_rateDiff > ONE_PCT) Then
          g_Tracing.Trace ("Error in ScopeMoveAxis Primary rate not acceptable ")
