@@ -1361,7 +1361,9 @@ g_Tracing.Trace ("End Wait in ScopeMoveAxis")
     d_rateError = Abs(d_rateDiff - Abs(d_gRate))
 
   
-    Me.CommandBlind "RG"                ' Assure we're in Guide rate
+    'Me.CommandBlind "RG"                ' Assure we're in Guide rate
+    
+    Me.CommandBlind "RC"   ' Try it at slow
     'If Rate = 0 Then r = "Q" Else r = "M" 'either stop or move commands
     
         s_r = "M"
@@ -1391,7 +1393,8 @@ g_Tracing.Trace ("End Wait in ScopeMoveAxis")
         'If s_d = "" Then s_d = "w"
         Else   ' this is a move in RA east or west
                 
-                If Rate < SIDEREAL_RATE_DEG_SEC Then
+                'If Rate < SIDEREAL_RATE_DEG_SEC Then
+                If Rate < 0 Then
                 s_d = "e"
                 
                 Else

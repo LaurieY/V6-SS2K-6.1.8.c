@@ -34,11 +34,11 @@ Name: "{cf}\ASCOM\Uninstall\Telescope\SS2K"
 
 [Files]
 ; regserver flag only if native COM, not .NET
-Source: "G:\T_Astro\Astro_Software\Ascom\V6-SS2K\6.1.8c_Move\SS2K Driver.dll"; DestDir: "{app}" ;AfterInstall: RegASCOM(); Flags: regserver
+Source: "G:\T_Astro\Astro_Software\Ascom\V6-SS2K-git\6.1.8c_Move\SS2K Driver.dll"; DestDir: "{app}" ;AfterInstall: RegASCOM(); Flags: regserver
 ; Require a read-me HTML to appear after installation, maybe driver's Help doc
-Source: "G:\T_Astro\Astro_Software\Ascom\V6-SS2K\6.1.8c_Move\SS2K Driver.htm"; DestDir: "{app}"; Flags: isreadme
+Source: "G:\T_Astro\Astro_Software\Ascom\V6-SS2K-git\6.1.8c_Move\SS2K Driver.htm"; DestDir: "{app}"; Flags: isreadme
 ; TODO: Add other files needed by your driver here (add subfolders above)
-Source: "G:\T_Astro\Astro_Software\Ascom\V6-SS2K\6.1.8c_Move\Tabctl32.ocx"; DestDir: "{sys}"; Flags: regserver
+Source: "G:\T_Astro\Astro_Software\Ascom\V6-SS2K-git\6.1.8c_Move\Tabctl32.ocx"; DestDir: "{sys}"; Flags: regserver
 
 
 
