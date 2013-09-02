@@ -1434,12 +1434,12 @@ g_Tracing.Trace ("End Wait in ScopeMoveAxis")
                 
                 'If Rate < SIDEREAL_RATE_DEG_SEC Then
                 If Rate < 0 Then
-                s_r = "e"
+                s_d = "e"
                 
                 Else
-                s_r = "w" ' RA axis
+                s_d = "w" ' RA axis
                 End If
-                If ((m_previousRA <> s_r) And (m_movingRA)) Then
+                If ((m_previousRA <> s_d) And (m_movingRA)) Then
                 ' its a reverse of direction without a stop being received.  Insert a stop command and 200msec delay
                 g_Tracing.Trace ("Move Axis-> INSERT CommandBlind  Q" & m_previousRA)
                 Me.CommandBlind "Q" & m_previousRA
@@ -1447,7 +1447,7 @@ g_Tracing.Trace ("End Wait in ScopeMoveAxis")
                 Me.CommandBlind "Q" & m_previousRA
                 m_movingRA = False
                 End If
-                m_previousRA = s_r
+                m_previousRA = s_d
                 m_movingRA = True
                 
             End If
