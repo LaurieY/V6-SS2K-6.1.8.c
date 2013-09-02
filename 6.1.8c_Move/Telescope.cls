@@ -997,9 +997,41 @@ Public Sub AbortSlew()
     g_Tracing.Trace ("In AbortSlew with Command " & q_any)
    Me.CommandBlind q_any                             ' Halt the slew
    m_bSlewing = False
-   g_Util.WaitForMilliseconds 1000                 ' Give the SS2K 3 seconds to react
+   'g_Util.WaitForMilliseconds 1000                 ' Give the SS2K 3 seconds to react
+   Me.WaitforStop (q_any) '  Wait until the not moving axis returns 3 consecutive identical readings
     
 End Sub
+Public Sub WaitforStop(ByVal Axis As String)
+'Wait until the indicated axis returns 3 consecutive identical readings
+' Only valid after a "Q" command, not sure how well it works for a very slow move?
+Select Case Axis
+    Case "e", "w"
+    Dim r1, r2, r3 As Double
+    r1 = 99
+    While (r1 <> r3)
+    r1 = Me.RightAscension
+    r2 = Me.RightAscension
+    r3 = Me.RightAscension
+    Wend
+    
+    
+    Case "n", "s"
+        Dim d1, d2, d3 As Double
+    r1 = 99
+    While (d1 <> d3)
+    d1 = Me.RightAscension
+    d2 = Me.RightAscension
+    d3 = Me.RightAscension
+    Wend
+
+    
+End Select
+
+
+
+
+End Sub
+
 Public Function CanMoveAxis(ByVal Axis As TelescopeAxes) As Boolean
 g_Tracing.Trace ("In CanMoveAxis with axis  " + CStr(Axis))
    ' Select Case Axis
@@ -1370,20 +1402,13 @@ g_Tracing.Trace ("End Wait in ScopeMoveAxis")
     Select Case Axis
         Case axisPrimary:
         m_preMoveRA = True
-        g_Tracing.Trace ("Received Primary with Rate zero and  Moving RA  and Moving DEC are " + CStr(m_movingRA) + "||" + CStr(m_movingDEC))
+        g_Tracing.Trace ("Received Primary with Rate " & CStr(Rate) & " and  Moving RA  and Moving DEC are " + CStr(m_movingRA) + "||" + CStr(m_movingDEC))
         If (Rate = 0) And (m_movingRA = False) Then
           g_Tracing.Trace ("Exiting Sub cos Moving RA  and Moving DEC are " + CStr(m_movingRA) + "||" + CStr(m_movingDEC))
             Exit Sub
             End If ' if ra not moving
         ' SGPro does send Primatry Axis Rate 0 as a stop moving - ignore it if there are no RA moves in progress
-             '   If (Rate = 0) And (m_movingDEC = True) Then
-               '' '  stop the DEC Move?
-           ' g_Tracing.Trace ("Aborting  Dec on primary rate zero")
-             '    AbortSlew
-             '  m_movingDEC = False
-            '    End If
-  
-          
+      
           
          If (Rate = 0) And (m_movingRA = True) Then
        
@@ -1409,12 +1434,12 @@ g_Tracing.Trace ("End Wait in ScopeMoveAxis")
                 
                 'If Rate < SIDEREAL_RATE_DEG_SEC Then
                 If Rate < 0 Then
-                s_d = "e"
+                s_r = "e"
                 
                 Else
-                s_d = "w" ' RA axis
+                s_r = "w" ' RA axis
                 End If
-                If ((m_previousRA <> s_d) And (m_movingRA)) Then
+                If ((m_previousRA <> s_r) And (m_movingRA)) Then
                 ' its a reverse of direction without a stop being received.  Insert a stop command and 200msec delay
                 g_Tracing.Trace ("Move Axis-> INSERT CommandBlind  Q" & m_previousRA)
                 Me.CommandBlind "Q" & m_previousRA
@@ -1422,7 +1447,7 @@ g_Tracing.Trace ("End Wait in ScopeMoveAxis")
                 Me.CommandBlind "Q" & m_previousRA
                 m_movingRA = False
                 End If
-                m_previousRA = s_d
+                m_previousRA = s_r
                 m_movingRA = True
                 
             End If
@@ -1438,7 +1463,7 @@ g_Tracing.Trace ("End Wait in ScopeMoveAxis")
             '**************************************
             '*  Need to send the appropriate Q command
             End If
-        Else
+            Else
                 If Rate < 0 Then
                 s_d = "s"
                 Else
