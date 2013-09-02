@@ -64,7 +64,7 @@ End Sub
 
 Public Sub LoadSettings()
     Dim buf As String
- g_Tracing.Trace ("Loading OneStar settings  6.1.7d_trace")
+ g_Tracing.Trace ("Loading OneStar settings  6.1.8c_trace")
    
 'Allow empty value or missing key in the registry
 On Error Resume Next

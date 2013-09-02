@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "tabctl32.ocx"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "Tabctl32.ocx"
 Begin VB.Form frmSetup 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "ASCOM Vixen SS2K Driver Setup"
@@ -50,86 +50,107 @@ Begin VB.Form frmSetup
       Left            =   0
       TabIndex        =   3
       Top             =   1
-      Width           =   6540
-      _ExtentX        =   11536
+      Width           =   7380
+      _ExtentX        =   13018
       _ExtentY        =   3836
       _Version        =   393216
       Style           =   1
-      Tabs            =   6
-      Tab             =   5
-      TabsPerRow      =   6
+      Tabs            =   7
+      Tab             =   6
+      TabsPerRow      =   7
       TabHeight       =   520
       TabCaption(0)   =   "&Communication"
       TabPicture(0)   =   "frmSetup.frx":1016
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "lbSpeed"
-      Tab(0).Control(1)=   "lbPort"
-      Tab(0).Control(2)=   "Label2"
+      Tab(0).Control(0)=   "lbPort"
+      Tab(0).Control(1)=   "lbSpeed"
+      Tab(0).Control(2)=   "Label1"
       Tab(0).Control(3)=   "Label5"
-      Tab(0).Control(4)=   "Label1"
+      Tab(0).Control(4)=   "Label2"
       Tab(0).ControlCount=   5
       TabCaption(1)   =   "&Version"
       TabPicture(1)   =   "frmSetup.frx":1032
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "radVersion(210)"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "radVersion(209)"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "radVersion(208)"
-      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "radVersion(207)"
-      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).Control(4)=   "radVersion(206)"
-      Tab(1).Control(4).Enabled=   0   'False
       Tab(1).Control(5)=   "radVersion(205)"
-      Tab(1).Control(5).Enabled=   0   'False
       Tab(1).Control(6)=   "radVersion(204)"
-      Tab(1).Control(6).Enabled=   0   'False
       Tab(1).Control(7)=   "radVersion(203)"
-      Tab(1).Control(7).Enabled=   0   'False
       Tab(1).Control(8)=   "radVersion(202)"
-      Tab(1).Control(8).Enabled=   0   'False
       Tab(1).Control(9)=   "radVersion(201)"
-      Tab(1).Control(9).Enabled=   0   'False
       Tab(1).ControlCount=   10
       TabCaption(2)   =   "&Scope"
       TabPicture(2)   =   "frmSetup.frx":104E
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label6"
-      Tab(2).Control(0).Enabled=   0   'False
+      Tab(2).Control(0)=   "edtSlewSettleTime"
       Tab(2).Control(1)=   "Label9"
-      Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "edtSlewSettleTime"
-      Tab(2).Control(2).Enabled=   0   'False
+      Tab(2).Control(2)=   "Label6"
       Tab(2).ControlCount=   3
       TabCaption(3)   =   "&About"
       TabPicture(3)   =   "frmSetup.frx":106A
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "lblAbout"
-      Tab(3).Control(0).Enabled=   0   'False
       Tab(3).ControlCount=   1
       TabCaption(4)   =   "Site&Elevation"
       TabPicture(4)   =   "frmSetup.frx":1086
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Label4"
-      Tab(4).Control(0).Enabled=   0   'False
+      Tab(4).Control(0)=   "edtSiteElevation"
       Tab(4).Control(1)=   "Label3"
-      Tab(4).Control(1).Enabled=   0   'False
-      Tab(4).Control(2)=   "edtSiteElevation"
-      Tab(4).Control(2).Enabled=   0   'False
+      Tab(4).Control(2)=   "Label4"
       Tab(4).ControlCount=   3
       TabCaption(5)   =   "1-Star Alignment"
       TabPicture(5)   =   "frmSetup.frx":10A2
-      Tab(5).ControlEnabled=   -1  'True
-      Tab(5).Control(0)=   "Label7"
-      Tab(5).Control(0).Enabled=   0   'False
-      Tab(5).Control(1)=   "cbox1Star"
-      Tab(5).Control(1).Enabled=   0   'False
+      Tab(5).ControlEnabled=   0   'False
+      Tab(5).Control(0)=   "cbox1Star"
+      Tab(5).Control(1)=   "Label7"
       Tab(5).ControlCount=   2
+      TabCaption(6)   =   "Move Rates"
+      TabPicture(6)   =   "frmSetup.frx":10BE
+      Tab(6).ControlEnabled=   -1  'True
+      Tab(6).Control(0)=   "MoveRates(0)"
+      Tab(6).Control(0).Enabled=   0   'False
+      Tab(6).Control(1)=   "MoveRates(1)"
+      Tab(6).Control(1).Enabled=   0   'False
+      Tab(6).Control(2)=   "MoveRates(2)"
+      Tab(6).Control(2).Enabled=   0   'False
+      Tab(6).ControlCount=   3
+      Begin VB.OptionButton MoveRates 
+         Caption         =   "Medium Speed Move"
+         Height          =   255
+         Index           =   2
+         Left            =   1680
+         TabIndex        =   30
+         Tag             =   "Medium"
+         Top             =   1600
+         Width           =   2000
+      End
+      Begin VB.OptionButton MoveRates 
+         Caption         =   "Slow Speed Move"
+         Height          =   255
+         Index           =   1
+         Left            =   1680
+         TabIndex        =   29
+         Tag             =   "Slow"
+         Top             =   1080
+         Width           =   2000
+      End
+      Begin VB.OptionButton MoveRates 
+         Caption         =   "Guide Rate Move"
+         Height          =   255
+         Index           =   0
+         Left            =   1680
+         TabIndex        =   28
+         Tag             =   "Guide"
+         Top             =   600
+         Width           =   2000
+      End
       Begin VB.CheckBox cbox1Star 
          Alignment       =   1  'Right Justify
          Height          =   375
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   26
          ToolTipText     =   "Force 1-Star Alignment on Syncs"
          Top             =   960
@@ -137,9 +158,9 @@ Begin VB.Form frmSetup
       End
       Begin VB.ComboBox lbPort 
          Height          =   315
-         ItemData        =   "frmSetup.frx":10BE
+         ItemData        =   "frmSetup.frx":10DA
          Left            =   -73800
-         List            =   "frmSetup.frx":10F9
+         List            =   "frmSetup.frx":1115
          Style           =   2  'Dropdown List
          TabIndex        =   17
          Top             =   540
@@ -147,9 +168,9 @@ Begin VB.Form frmSetup
       End
       Begin VB.ComboBox lbSpeed 
          Height          =   315
-         ItemData        =   "frmSetup.frx":1174
+         ItemData        =   "frmSetup.frx":1190
          Left            =   -73800
-         List            =   "frmSetup.frx":11B7
+         List            =   "frmSetup.frx":11D3
          Style           =   2  'Dropdown List
          TabIndex        =   16
          Top             =   900
@@ -263,7 +284,7 @@ Begin VB.Form frmSetup
       Begin VB.Label Label7 
          Caption         =   "1-Star Alignment d"
          Height          =   495
-         Left            =   1680
+         Left            =   -73320
          TabIndex        =   27
          Top             =   960
          Width           =   1575
@@ -433,7 +454,7 @@ Private Sub Form_Load()
     
    'Version settings
    radVersion.Item(g_ROMVersion.Version) = True
-   
+   MoveRates.Item(g_MoveRates.MoveRate) = True
    'Scope settings
    edtSlewSettleTime.Text = CStr(g_Scope.SlewSettleTime)
    edtSiteElevation.Text = CStr(g_SiteElevation.SiteElevation)
@@ -462,7 +483,16 @@ Private Sub cmdOK_Click()
       'Communication settings
       g_Communication.Port = lbPort.ListIndex + 1
       g_Communication.Speed = CInt(lbSpeed.List(lbSpeed.ListIndex))
-      
+            For nIndex = MoveRates.LBound To MoveRates.UBound
+        If MoveRates.Item(nIndex) = True Then
+           g_MoveRates.MoveRate = nIndex
+           'g_MoveRates.MoveSpeed = MoveRates.Item(nIndex).Tag
+           g_Tracing.Trace ("Values for Rate = " & nIndex & " descr = " & MoveRates.Item(nIndex).Tag)
+          ' g_Tracing.Trace ("Description  for Rate = " & g_MoveRates.MoveSpeed)
+           Exit For
+        End If
+      Next nIndex
+       
       'Version settings
       For nIndex = radVersion.LBound To radVersion.UBound
         If radVersion.Item(nIndex) = True Then
@@ -478,13 +508,13 @@ Private Sub cmdOK_Click()
       g_Scope.SaveSettings               'Store scope settings to registry
       g_ROMVersion.SaveSettings          'Store version settings to registry
       g_SiteElevation.SaveSettings
-      
+      g_MoveRates.SaveSettings
       
       If cbox1Star.Value = 1 Then
        g_OneStar.AStar = True
        Else
         g_OneStar.AStar = False
-    End If
+        End If
         '******************************
         '**************g_OneStar.AStar = True
         

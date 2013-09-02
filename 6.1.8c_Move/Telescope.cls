@@ -246,6 +246,7 @@ Private Sub Class_Initialize()
    Set g_Communication = New Communication
    Set g_Scope = New Scope
    Set g_ROMVersion = New ROMVersion
+   Set g_MoveRates = New MoveRates
    Set g_SiteElevation = New SiteElevation
        Set g_AxisRates = New AxisRates  '************
          'g_AxisRates.LoadSettings '***********
@@ -1376,6 +1377,20 @@ Public Sub ScopeMoveAxis(ByVal Axis As TelescopeAxes, Rate As Double)
     ' for a possible Metaguide issue
     
     g_Tracing.Trace ("In ScopeMoveAxis axis and rate = " & CStr(Axis) & " || " & CStr(Rate))
+    
+    ' The actual rate is taken from the setup values for MoveRate, Guide, Slow and Medium
+    ' Setup the code as appropriate
+    Dim mr As String
+    g_Tracing.Trace ("Getting Move speed in ScopeMoveAxis Moverate is " & g_MoveRates.MoveRate & " |")
+    Select Case g_MoveRates.MoveRate
+    Case 0:
+    mr = "RG"
+    Case 1:
+    mr = "RC"
+    Case 2:
+    mr = "RM"
+    End Select
+    
     CheckConnected   '********* uncomment after testing
     m_preMoveRA = False
     m_premoveDEC = False
@@ -1395,7 +1410,7 @@ g_Tracing.Trace ("End Wait in ScopeMoveAxis")
   
     'Me.CommandBlind "RG"                ' Assure we're in Guide rate
     
-    Me.CommandBlind "RC"   ' Try it at slow
+    Me.CommandBlind mr  ' At the preselected rate, Guide, Slow or Medium
     'If Rate = 0 Then r = "Q" Else r = "M" 'either stop or move commands
     
         s_r = "M"
