@@ -74,11 +74,11 @@ Public g_bConnected As Boolean
 Public g_bInitComplete As Boolean
 
 Public Sub Main()
-'    g_bInitComplete = False                 ' 1-Time initialization not done
+    g_bInitComplete = False                 ' 1-Time initialization not done
 
-'    If App.StartMode = vbSModeStandalone Then
- '       MsgBox "This driver can only be run from an ASCOM application", , "ASCOM SS2K Driver"
- '       End
- '   End If
+   ' If App.StartMode = vbSModeStandalone Then
+   '    MsgBox "This driver can only be run from an ASCOM application", , "ASCOM SS2K Driver"
+   '    Exit Sub
+ '  End If
     
 End Sub

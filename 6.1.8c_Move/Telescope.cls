@@ -234,7 +234,15 @@ Private Sub Class_Initialize()
    'g_Tracing.Trace ("starting telescope class initialize 5.1.4_trace")
    'Create helper classes
 
-   Set g_Util = New DriverHelper.Util
+ InitOnce
+   
+End Sub
+
+Public Sub InitOnce()
+Debug.Print "InitOnce g_bInitComplete " & g_bInitComplete
+    If g_bInitComplete Then Exit Sub
+    
+      Set g_Util = New DriverHelper.Util
    Set g_Profile = New DriverHelper.Profile
    Set g_Tracing = New Tracing
     g_Tracing.Trace ("starting telescope class initialize 6.1.8c_trace")
@@ -262,7 +270,10 @@ g_DriveRate = driveSidereal
    
    m_bTracking = True
    
+   g_bInitComplete = True                 ' 1-Time initialization completed
+
 End Sub
+
 
 Private Sub Class_Terminate()
     
@@ -1138,12 +1149,21 @@ End Sub
 
 Public Sub SetupDialog()
 
-   If m_Serial.Connected Then
-      Err.Raise SCODE_SETUP_CONNECTED, ERR_SOURCE, MSG_SETUP_CONNECTED
-   End If
+'If m_Serial.Connected Then
+   '   Err.Raise SCODE_SETUP_CONNECTED, ERR_SOURCE, MSG_SETUP_CONNECTED
+  ' End If
    
-   frmSetup.Show 1
-   Unload frmSetup
+  ' frmSetup.Show 1
+  ' Unload frmSetup
+  
+      If Not g_bConnected Then
+        frmSetup.Show vbModal
+        Unload frmSetup
+    Else
+     '   RaiseError SCODE_SETUP_CONNECTED, _
+        '          ERR_SOURCE, _
+        '          MSG_SETUP_CONNECTED
+    End If
     
 End Sub
 

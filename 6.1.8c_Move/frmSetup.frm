@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "Tabctl32.ocx"
 Begin VB.Form frmSetup 
-   BorderStyle     =   1  'Fixed Single
+   BorderStyle     =   3  'Fixed Dialog
    Caption         =   "ASCOM Vixen SS2K Driver Setup"
    ClientHeight    =   3390
    ClientLeft      =   2760
@@ -13,6 +13,7 @@ Begin VB.Form frmSetup
    MinButton       =   0   'False
    ScaleHeight     =   3390
    ScaleWidth      =   7350
+   ShowInTaskbar   =   0   'False
    Begin VB.PictureBox picASCOM 
       AutoSize        =   -1  'True
       Height          =   900
@@ -74,68 +75,48 @@ Begin VB.Form frmSetup
       TabCaption(1)   =   "&Version"
       TabPicture(1)   =   "frmSetup.frx":1032
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "radVersion(210)"
-      Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "radVersion(209)"
-      Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "radVersion(208)"
-      Tab(1).Control(2).Enabled=   0   'False
-      Tab(1).Control(3)=   "radVersion(207)"
-      Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "radVersion(206)"
-      Tab(1).Control(4).Enabled=   0   'False
-      Tab(1).Control(5)=   "radVersion(205)"
-      Tab(1).Control(5).Enabled=   0   'False
-      Tab(1).Control(6)=   "radVersion(204)"
-      Tab(1).Control(6).Enabled=   0   'False
-      Tab(1).Control(7)=   "radVersion(203)"
-      Tab(1).Control(7).Enabled=   0   'False
-      Tab(1).Control(8)=   "radVersion(202)"
-      Tab(1).Control(8).Enabled=   0   'False
-      Tab(1).Control(9)=   "radVersion(201)"
-      Tab(1).Control(9).Enabled=   0   'False
+      Tab(1).Control(0)=   "radVersion(201)"
+      Tab(1).Control(1)=   "radVersion(202)"
+      Tab(1).Control(2)=   "radVersion(203)"
+      Tab(1).Control(3)=   "radVersion(204)"
+      Tab(1).Control(4)=   "radVersion(205)"
+      Tab(1).Control(5)=   "radVersion(206)"
+      Tab(1).Control(6)=   "radVersion(207)"
+      Tab(1).Control(7)=   "radVersion(208)"
+      Tab(1).Control(8)=   "radVersion(209)"
+      Tab(1).Control(9)=   "radVersion(210)"
       Tab(1).ControlCount=   10
       TabCaption(2)   =   "&Scope"
       TabPicture(2)   =   "frmSetup.frx":104E
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label6"
-      Tab(2).Control(0).Enabled=   0   'False
+      Tab(2).Control(0)=   "edtSlewSettleTime"
       Tab(2).Control(1)=   "Label9"
-      Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "edtSlewSettleTime"
-      Tab(2).Control(2).Enabled=   0   'False
+      Tab(2).Control(2)=   "Label6"
       Tab(2).ControlCount=   3
       TabCaption(3)   =   "&About"
       TabPicture(3)   =   "frmSetup.frx":106A
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "lblAbout"
-      Tab(3).Control(0).Enabled=   0   'False
       Tab(3).ControlCount=   1
       TabCaption(4)   =   "Site&Elevation"
       TabPicture(4)   =   "frmSetup.frx":1086
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Label4"
-      Tab(4).Control(0).Enabled=   0   'False
+      Tab(4).Control(0)=   "edtSiteElevation"
       Tab(4).Control(1)=   "Label3"
-      Tab(4).Control(1).Enabled=   0   'False
-      Tab(4).Control(2)=   "edtSiteElevation"
-      Tab(4).Control(2).Enabled=   0   'False
+      Tab(4).Control(2)=   "Label4"
       Tab(4).ControlCount=   3
       TabCaption(5)   =   "1-Star Alignment"
       TabPicture(5)   =   "frmSetup.frx":10A2
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "Label7"
-      Tab(5).Control(1)=   "cbox1Star"
+      Tab(5).Control(0)=   "cbox1Star"
+      Tab(5).Control(1)=   "Label7"
       Tab(5).ControlCount=   2
       TabCaption(6)   =   "Move Rates"
       TabPicture(6)   =   "frmSetup.frx":10BE
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "MoveRates(0)"
-      Tab(6).Control(0).Enabled=   0   'False
+      Tab(6).Control(0)=   "MoveRates(2)"
       Tab(6).Control(1)=   "MoveRates(1)"
-      Tab(6).Control(1).Enabled=   0   'False
-      Tab(6).Control(2)=   "MoveRates(2)"
-      Tab(6).Control(2).Enabled=   0   'False
+      Tab(6).Control(2)=   "MoveRates(0)"
       Tab(6).ControlCount=   3
       Begin VB.OptionButton MoveRates 
          Caption         =   "Medium Speed Move"
@@ -579,6 +560,3 @@ Private Function Validate() As Boolean
    End If
 End Function
 
-Private Sub ppSetup_DblClick()
-
-End Sub
