@@ -604,8 +604,13 @@ End Property
 
 Public Sub MoveAxis(ByVal Axis As TelescopeAxes, ByVal Rate As Double)
 g_Tracing.Trace ("In  MoveAxis with Axis " & CStr(Axis) & " Rate " & CStr(Rate))
-
+ Select Case Axis
+        Case axisPrimary, axisSecondary:
   Me.ScopeMoveAxis Axis, Rate
+    Case Else
+    Err.Raise SCODE_INVALID_VALUE, ERR_SOURCE, _
+         "Property MoveAxis" & MSG_INVALID_VALUE
+    End Select
          ' Err.Raise SCODE_NOT_IMPLEMENTED, ERR_SOURCE, _
          "Property MoveAxis" & MSG_NOT_IMPLEMENTED
 End Sub
@@ -1046,13 +1051,13 @@ End Sub
 
 Public Function CanMoveAxis(ByVal Axis As TelescopeAxes) As Boolean
 g_Tracing.Trace ("In CanMoveAxis with axis  " + CStr(Axis))
-   ' Select Case Axis
-   ' Case axisPrimary, axisSecondary
-    '    CanMoveAxis = CanSetTracking
-   ' Case Else
-    '    CanMoveAxis = False
-   ' End Select
-   CanMoveAxis = True
+  Select Case Axis
+   Case axisPrimary, axisSecondary
+        CanMoveAxis = CanSetTracking
+    Case Else
+        CanMoveAxis = False
+    End Select
+  ' CanMoveAxis = True
  ' CanMoveAxis = False
 End Function
 Public Sub CommandBlind(ByVal Command As String)
@@ -1395,6 +1400,8 @@ Public Sub ScopeMoveAxis(ByVal Axis As TelescopeAxes, Rate As Double)
     '  added on 2 June 2008.
     ' if singleaxis moves checked in setup then if a DEC move arrives quit any RA move.  This is a temp fix
     ' for a possible Metaguide issue
+    ' Sept 2013, a Guide Rate of zero means performa stop in that axis.
+    ' Only perform a Q<n> if the axis was actually moving
     
     g_Tracing.Trace ("In ScopeMoveAxis axis and rate = " & CStr(Axis) & " || " & CStr(Rate))
     
@@ -1456,9 +1463,13 @@ g_Tracing.Trace ("End Wait in ScopeMoveAxis")
         
          If (d_rateError > g_derrorMargin) And (d_rateDiff > ONE_PCT) Then
          g_Tracing.Trace ("Error in ScopeMoveAxis Primary rate not acceptable ")
-         Err.Raise SCODE_MOVE_RATE_ERROR, _
+       '  Err.Raise SCODE_MOVE_RATE_ERROR, _
+        '            ERR_SOURCE, _
+         '           MSG_MOVE_RATE_ERROR
+         
+                  Err.Raise SCODE_INVALID_VALUE, _
                     ERR_SOURCE, _
-                    MSG_MOVE_RATE_ERROR
+                MSG_INVALID_VALUE
                     End If
         If d_rateDiff < ONE_PCT Then
         s_r = "Q"
@@ -1527,9 +1538,9 @@ g_Tracing.Trace ("End Wait in ScopeMoveAxis")
         End If  ' **********************of setup to perform a DEC move
          If (d_rateError > g_derrorMargin) And (Rate <> 0) Then
          g_Tracing.Trace ("Error in ScopeMoveAxis rate not acceptable ")
-         Err.Raise SCODE_MOVE_RATE_ERROR, _
+                  Err.Raise SCODE_INVALID_VALUE, _
                     ERR_SOURCE, _
-                    MSG_MOVE_RATE_ERROR
+                MSG_INVALID_VALUE
                     End If
             
 
