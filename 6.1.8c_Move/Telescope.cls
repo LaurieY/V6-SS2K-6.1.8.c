@@ -239,8 +239,8 @@ Private Sub Class_Initialize()
 End Sub
 
 Public Sub InitOnce()
-Debug.Print "InitOnce g_bInitComplete " & g_bInitComplete
-    If g_bInitComplete Then Exit Sub
+'Debug.Print "InitOnce g_bInitComplete " & g_bInitComplete
+ '   If g_bInitComplete Then Exit Sub
     
       Set g_Util = New DriverHelper.Util
    Set g_Profile = New DriverHelper.Profile
