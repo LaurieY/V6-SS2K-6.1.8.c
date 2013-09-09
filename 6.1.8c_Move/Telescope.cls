@@ -583,8 +583,8 @@ End Property
 
 Public Property Let GuideRateRightAscension(ByVal vData As Double)
      g_Tracing.Trace ("In Let GuideRateRA with " & CStr(vData) & " --IGNORED")
-          Err.Raise SCODE_INVALID_VALUE, ERR_SOURCE, _
-         "Property (Let)GuideRateRightAscension" & MSG_INVALID_VALUE
+          Err.Raise SCODE_NOT_IMPLEMENTED, ERR_SOURCE, _
+         "Property (Let)GuideRateRightAscension" & MSG_NOT_IMPLEMENTED
 End Property
 
 Public Property Get GuideRateRightAscension() As Double
