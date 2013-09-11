@@ -57,9 +57,11 @@ Private m_nVersion As Integer
 
 Property Let Version(nVersion As Integer)
     m_nVersion = nVersion
+    g_Tracing.Trace ("In ROM SET Version with Value " & m_nVersion & "#")
 End Property
 
 Property Get Version() As Integer
+g_Tracing.Trace ("In ROM Get Version with Value " & m_nVersion & "#")
     Version = m_nVersion
 End Property
 
@@ -74,6 +76,7 @@ Public Sub LoadSettings()
 On Error Resume Next
     
     buf = g_Profile.GetValue(g_ID, REGVAL_VERSION, REGSEC_ROM)
+    g_Tracing.Trace ("sIn ROM Load Settings with Value " & buf & "#")
     If buf <> "" Then
         m_nVersion = CInt(buf)
     Else
