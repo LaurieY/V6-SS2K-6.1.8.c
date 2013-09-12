@@ -1,6 +1,6 @@
 ErrorConstants = 148, 309, 803, 931, C
 AstronomyFuncs = 46, 46, 1155, 668, C
-frmSetup = 264, 88, 1326, 711, C, 502, 190, 1272, 813, C
+frmSetup = 264, 88, 1326, 711, , 214, 38, 984, 661, C
 Communication = 97, 110, 998, 733, C
 ROMVersion = 591, 310, 1397, 903, C
 Scope = 100, 140, 755, 763, C

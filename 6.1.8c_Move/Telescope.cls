@@ -651,10 +651,11 @@ g_Tracing.Trace ("In Get SiderealTime")
 End Property
 
 Public Property Get SiteElevation() As Double
-g_Tracing.Trace ("In Get SiteElevation")
+  g_Tracing.Trace ("In Get SiteElevation got value " & CStr(g_SiteElevation.SiteElevation) & "#")
    ' Err.Raise SCODE_NOT_IMPLEMENTED, ERR_SOURCE, _
          "Property (Get) SiteElevation" & MSG_NOT_IMPLEMENTED
     SiteElevation = g_SiteElevation.SiteElevation
+  
 End Property
 
 Public Property Let SiteElevation(ByVal newVal As Double)
@@ -1964,7 +1965,7 @@ Private Sub DoSync()
    ' Allow old and new responses. Old responds "0" or "1", new
    ' responds "Coordinates matched.      ". So a "0" is a failure,
    ' as well as "".
-   '
+   
    If g_ROMVersion.Version > 205 Then
     buf = Me.CommandString("CM")
     If buf = "0" Or buf = "" Then
