@@ -56,21 +56,21 @@ Begin VB.Form frmSetup
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   3
+      Tab             =   5
       TabsPerRow      =   7
       TabHeight       =   520
       TabCaption(0)   =   "&Communication"
       TabPicture(0)   =   "frmSetup.frx":1016
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "lbPort"
+      Tab(0).Control(0)=   "Label2"
       Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "lbSpeed"
+      Tab(0).Control(1)=   "Label5"
       Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "Label1"
       Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "Label5"
+      Tab(0).Control(3)=   "lbSpeed"
       Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Label2"
+      Tab(0).Control(4)=   "lbPort"
       Tab(0).Control(4).Enabled=   0   'False
       Tab(0).ControlCount=   5
       TabCaption(1)   =   "&Version"
@@ -82,26 +82,26 @@ Begin VB.Form frmSetup
       TabCaption(2)   =   "&Scope"
       TabPicture(2)   =   "frmSetup.frx":104E
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "edtSlewSettleTime"
+      Tab(2).Control(0)=   "Label6"
       Tab(2).Control(1)=   "Label9"
-      Tab(2).Control(2)=   "Label6"
+      Tab(2).Control(2)=   "edtSlewSettleTime"
       Tab(2).ControlCount=   3
       TabCaption(3)   =   "&About"
       TabPicture(3)   =   "frmSetup.frx":106A
-      Tab(3).ControlEnabled=   -1  'True
+      Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "lblAbout"
       Tab(3).Control(0).Enabled=   0   'False
       Tab(3).ControlCount=   1
       TabCaption(4)   =   "Site&Elevation"
       TabPicture(4)   =   "frmSetup.frx":1086
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "edtSiteElevation"
+      Tab(4).Control(0)=   "Label4"
       Tab(4).Control(1)=   "Label3"
-      Tab(4).Control(2)=   "Label4"
+      Tab(4).Control(2)=   "edtSiteElevation"
       Tab(4).ControlCount=   3
       TabCaption(5)   =   "1-Star Alignment"
       TabPicture(5)   =   "frmSetup.frx":10A2
-      Tab(5).ControlEnabled=   0   'False
+      Tab(5).ControlEnabled=   -1  'True
       Tab(5).Control(0)=   "Label7"
       Tab(5).Control(0).Enabled=   0   'False
       Tab(5).Control(1)=   "cbox1Star"
@@ -110,11 +110,11 @@ Begin VB.Form frmSetup
       TabCaption(6)   =   "Move Rates"
       TabPicture(6)   =   "frmSetup.frx":10BE
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "MoveRates(0)"
+      Tab(6).Control(0)=   "MoveRates(2)"
       Tab(6).Control(0).Enabled=   0   'False
       Tab(6).Control(1)=   "MoveRates(1)"
       Tab(6).Control(1).Enabled=   0   'False
-      Tab(6).Control(2)=   "MoveRates(2)"
+      Tab(6).Control(2)=   "MoveRates(0)"
       Tab(6).Control(2).Enabled=   0   'False
       Tab(6).ControlCount=   3
       Begin VB.Frame Frame1 
@@ -249,7 +249,7 @@ Begin VB.Form frmSetup
       Begin VB.CheckBox cbox1Star 
          Alignment       =   1  'Right Justify
          Height          =   375
-         Left            =   -71160
+         Left            =   3840
          TabIndex        =   16
          ToolTipText     =   "Force 1-Star Alignment on Syncs"
          Top             =   960
@@ -291,9 +291,9 @@ Begin VB.Form frmSetup
          Width           =   855
       End
       Begin VB.Label Label7 
-         Caption         =   "1-Star Alignment 20867"
+         Caption         =   "1-Star Alignment"
          Height          =   495
-         Left            =   -73320
+         Left            =   1680
          TabIndex        =   17
          Top             =   960
          Width           =   1575
@@ -340,7 +340,7 @@ Begin VB.Form frmSetup
       End
       Begin VB.Label lblAbout 
          Height          =   1455
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   10
          Top             =   600
          Width           =   3255

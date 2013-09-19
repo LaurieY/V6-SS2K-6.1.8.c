@@ -151,6 +151,10 @@ Attribute VB_Ext_KEY = "Top_Level" ,"Yes"
 ' 7 July 2011     6.1.7b - RTe built for Ascom 6 and Released
 
 ' 20 August 2013  6.1.8a - Added an option to Force Single Star Alignment on ALL Sync  Commands
+
+' 18 Sept 2013  6.1.8c - Added options for Move speed
+'                            ignore StopSlew commands if the driver thinks it isn't moving as it alters RA by stopping
+
 '---------------------------------------------------------------------
 
 Option Explicit
@@ -269,6 +273,9 @@ g_DriveRate = driveSidereal
    m_dTargetRA = 999 ' indicates NOT yet written to
    
    m_bTracking = True
+   m_bSlewing = False
+   m_movingRA = False
+   m_movingDEC = False
    
    g_bInitComplete = True                 ' 1-Time initialization completed
 
@@ -739,15 +746,15 @@ Public Property Get Slewing() As Boolean
       g_Tracing.Trace ("In Slewing?  RA is  " & g_Util.HoursToHMS(RightAscension) & "  DEC is " & g_Util.DegreesToDMS(Declination, ":", ":", ""))
       'Due to rounding errors the current RA & Dec might actually never becomes exactly equal to target RA & Dec.
       'I choose to consider the slewing as finished when current RA & Dec is within +- 0.1 degrees of the target RA & Dec
-      'The remaining part of the slewing has to be incorperated in the settle time
+      'The remaining part of the slewing has to be incorporated in the settle time
       If (dCurrentRA < m_dTargetRA + 0.1) And (dCurrentRA > m_dTargetRA - 0.1) And _
          (dCurrentDec < m_dTargetDec + 0.1) And (dCurrentDec > m_dTargetDec - 0.1) Then
          'We are within +- 0.1 degrees of are target RA &Dec
-         
+         g_Tracing.Trace ("In Slewing?? We are within +- 0.1 degrees of are target RA &Dec")
          'Now check if enough time has elapsed for the scope to settle
          If (GetTickCount() > m_lAsyncEndTix) Then
             'Scope settle time has elapsed.
-            
+            g_Tracing.Trace ("In Slewing??? Scope settle time has elapsed")
             'Flag slewing as finished
             m_bSlewing = False
          End If
@@ -809,6 +816,7 @@ Public Property Let TargetDeclination(ByVal newVal As Double)
    
    'Make sure any slewing in process is terminated before setting new target Dec
    If Me.Slewing Then
+   g_Tracing.Trace ("In Let TargetDeclination Calling AbortSlew")
       Me.AbortSlew
    End If
    
@@ -852,6 +860,7 @@ g_Tracing.Trace ("In Let TargetRightAscension " & g_Util.HoursToHMS(newVal))
    
    'Make sure any slewing in process is terminated before setting new target RA
    If Me.Slewing Then
+   g_Tracing.Trace ("In Let TargetRA Calling AbortSlew")
       Me.AbortSlew
    End If
    
@@ -999,8 +1008,8 @@ Private Function vb_mdy(dt As Date) As String
 End Function
 
 Public Sub AbortSlew()
-  
-   
+  g_Tracing.Trace ("In AbortSlew Slewing is " & CStr(m_bSlewing) & " movingDEC is " & CStr(m_movingDEC) & " movingRA is " & CStr(m_movingRA) & "|")
+   If (m_bSlewing Or m_movingRA Or m_movingDEC) Then
    '**  If its in a Move command and abort is called stop the appropriate direction
    Dim q_any As String
    If m_movingDEC Then
@@ -1011,13 +1020,14 @@ Public Sub AbortSlew()
    m_movingRA = False
    Else
    q_any = "Q"
+   'q_any = ""
    End If
     g_Tracing.Trace ("In AbortSlew with Command " & q_any)
    Me.CommandBlind q_any                             ' Halt the slew
    m_bSlewing = False
    'g_Util.WaitForMilliseconds 1000                 ' Give the SS2K 3 seconds to react
    Me.WaitforStop (q_any) '  Wait until the not moving axis returns 3 consecutive identical readings
-    
+    End If
 End Sub
 Public Sub WaitforStop(ByVal Axis As String)
 'Wait until the indicated axis returns 3 consecutive identical readings
@@ -1220,6 +1230,7 @@ Public Sub SlewToTargetAsync()
    
    'Make sure any slewing in progress is terminated
    If Me.Slewing Then
+   g_Tracing.Trace ("In Let SlewToTargetAsync Calling AbortSlew")
       Me.AbortSlew
    End If
    
